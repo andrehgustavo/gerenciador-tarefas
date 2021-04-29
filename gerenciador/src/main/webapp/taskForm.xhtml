@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Cadastrar Tarefa</h1>
+	
+	<h:form id="frmTask">
+		<table>
+			<tr>
+				<td class="hed" colspan="2">Cadastrar Tarefa</td>
+			</tr>
+			<tr>
+				<td>Título:</td>
+				<td colspan="3"><h:inputText value="#{taskFormController.task.title}" style="width:100%"></h:inputText></td>
+			</tr>
+			<tr>
+				<td valign="top">Descrição:</td> 
+				<td colspan="3"><h:inputTextarea value="#{taskFormController.task.description}" rows="10" style="width:100%"></h:inputTextarea></td> 
+			</tr>
+			<tr>
+				<td>Responsável:</td> 
+				<td><h:selectOneMenu value="#{taskFormController.task.owner}" converter="#{ownerConvert}">
+					<f:selectItem itemValue="#{null}" itemLabel="-- Escolha um --" />
+	   				<f:selectItems value="#{taskFormController.owners}" var="owner"
+		   			itemLabel="#{owner.name}" itemValue="#{owner}" />
+		   			</h:selectOneMenu></td>
+		   		<td>Prioridade:</td> 
+				<td>
+					<h:selectOneMenu value="#{taskFormController.task.priority}" var="">
+						<f:selectItem itemValue="#{null}" itemLabel="-- Escolha uma --" />
+		   				<f:selectItems value="#{taskFormController.priorities}" var="priority" 
+			   			itemLabel="#{priority.label}" itemValue="#{priority}"/>
+					</h:selectOneMenu>
+				</td>				
+	   		</tr>
+	   		<tr>
+	   			<td>Deadline: </td>
+	   			<td>
+					<h:inputText id="data"
+						value="#{taskFormController.date}" type="txt" required="true"
+						requiredMessage=" *POR FAVOR, INFORME A DATA ATUAL!">
+					</h:inputText>
+				</td>
+			</tr>
+   		</table>
+		<h:commandButton action="#{taskFormController.saveTask}" value="Cadastrar Tarefa">
+		<br></br>
+		</h:commandButton>
+	</h:form>
+</body> 
+</html>

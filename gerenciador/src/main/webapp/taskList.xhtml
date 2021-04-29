@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Listagem de Tarefas</h1>
+	
+	<h:form id="frmTask">		
+	
+		<h:dataTable value="#{taskListController.tasks}" var="t" id="dtTask">
+			<h:column>
+				<f:facet name="header">Número</f:facet>
+				#{t.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Título</f:facet>
+				#{t.title}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Responsável</f:facet>
+				#{t.owner.name}
+			</h:column>			
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:commandLink action="#{taskListController.updateTask(t)}" value="Editar">
+					<f:ajax render="frmTask:dtTask"></f:ajax>
+				</h:commandLink> 
+				| <h:commandLink action="#{taskListController.deleteTask(t)}" value="Excluir" onclick="return window.confirm('Tem certeza que deseja excluir essa tarefa?')">
+					<f:ajax render="frmTask:dtTask"></f:ajax>
+				</h:commandLink>  
+				| Concluir
+			</h:column>
+		</h:dataTable>
+		
+	</h:form>
+</body> 
+</html>
